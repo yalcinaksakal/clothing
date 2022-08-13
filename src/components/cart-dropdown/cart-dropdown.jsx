@@ -1,10 +1,16 @@
 import { useSelector } from "react-redux";
 import Button from "../button/button";
 import CartItem from "../cart-item/cart-item";
+import { useNavigate } from "react-router-dom";
 import "./cart-dropdown.scss";
 
 const CartDropdown = ({ toogleCartVisibility }) => {
-	const { cart } = useSelector(state => state.cart);
+	const { cart } = useSelector(state => state.cart),
+		navigate = useNavigate(),
+		gotoCheckout = () => {
+			navigate("/checkout");
+			toogleCartVisibility();
+		};
 	return (
 		<div
 			className="invisible-container"
@@ -13,11 +19,13 @@ const CartDropdown = ({ toogleCartVisibility }) => {
 		>
 			<div className="cart-dropdown-container">
 				<div className="cart-items">
-					{Object.values(cart).map(item => (
-						<CartItem key={item.id} item={item} />
-					))}
+					{Object.values(cart)
+						.filter(item => item.quantity)
+						.map(item => (
+							<CartItem key={item.id} item={item} />
+						))}
 				</div>
-				<Button>Go to checkout</Button>
+				<Button onClick={gotoCheckout}>Go to checkout</Button>
 			</div>
 		</div>
 	);

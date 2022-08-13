@@ -10,6 +10,7 @@ import {
 import { useDispatch } from "react-redux";
 import { loginActions } from "./store/login-slice";
 import Shop from "./routes/shop/shop";
+import Checkout from "./routes/checkout/checkout";
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const App = () => {
 				<Route index element={<Home />} />
 				<Route path="shop" element={<Shop />} />
 				<Route path="auth" element={<Auth />} />
+				<Route path="checkout" element={<Checkout />} />
 			</Route>
 		</Routes>
 	);
