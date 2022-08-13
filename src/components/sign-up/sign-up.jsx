@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { createUserEmailAndPwd } from "../../utils/firebase.auth";
 import { createUserDocFromAuth } from "../../utils/firebase.firestore";
+import Button from "../button/button";
 import FormInput from "../form-input/form-input";
+import "./sign-up.scss";
+
 const signUpData = { email: "", name: "", pwd: "", pwd2: "" };
 
 const SignUp = () => {
@@ -23,8 +26,9 @@ const SignUp = () => {
 			setData(prev => ({ ...prev, [name]: value }));
 		};
 	return (
-		<div>
-			<h1>Sign up With your email</h1>
+		<div className="sign-up-container">
+			<h2>Don't have an accout</h2>
+			<span>Sign up With your email</span>
 			<form onSubmit={submitHandler}>
 				<FormInput
 					label="Display Name"
@@ -58,7 +62,7 @@ const SignUp = () => {
 					onChange={changeHandler}
 					value={pwd2}
 				/>
-				<button type="submit">Sign Up</button>
+				<Button type="submit">Sign Up</Button>
 			</form>
 		</div>
 	);
