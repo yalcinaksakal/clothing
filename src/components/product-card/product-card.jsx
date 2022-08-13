@@ -15,7 +15,7 @@ const ProductCard = props => {
 			</div>
 			<div className="footer">
 				<span className="name">{name}</span>
-				<span className="price">{price}</span>
+				<span className="price">{price}€</span>
 			</div>
 			<Button buttonType="inverted" onClick={addItemHandler}>
 				Add to card

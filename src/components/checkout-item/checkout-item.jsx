@@ -16,14 +16,14 @@ const CheckoutItem = ({ item }) => {
 					className="arrow"
 					onClick={() => dispatch(cartActions.subtractProduct(id))}
 				>
-					&#60;
+					&#10094;
 				</span>
 				<span className="value">{quantity}</span>
 				<span
 					className="arrow"
 					onClick={() => dispatch(cartActions.addProduct(item))}
 				>
-					&#62;
+					&#10095;
 				</span>
 			</div>
 			<div className="price">{quantity * price}</div>
