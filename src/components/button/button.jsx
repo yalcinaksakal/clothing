@@ -1,7 +1,7 @@
 import "./button.styles.scss";
 
 const BUTTON_TYPES = {
-	google: "google-signipn",
+	google: "google-sign-in",
 	inverted: "inverted",
 };
 

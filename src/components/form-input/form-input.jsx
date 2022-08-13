@@ -1,6 +1,5 @@
 import styles from "./form.module.scss";
 const FormInput = ({ label, ...otherProps }) => {
-	console.log(styles);
 	return (
 		<div className={styles.group}>
 			<input className={styles.formInput} {...otherProps}></input>
