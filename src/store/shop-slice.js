@@ -8,11 +8,7 @@ const initialState = {
 const shopSlice = createSlice({
 	name: "shop",
 	initialState,
-	reducers: {
-		setUser(state, action) {
-			state.user = action.payload;
-		},
-	},
+	reducers: {},
 });
 
 export const shopActions = shopSlice.actions;

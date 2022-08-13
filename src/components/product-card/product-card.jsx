@@ -1,7 +1,13 @@
 import Button from "../button/button";
 import "./product-card.styles.scss";
+import { useDispatch } from "react-redux";
+import { cartActions } from "../../store/cart-slice";
 
-const ProductCard = ({ name, price, imageUrl, id }) => {
+const ProductCard = props => {
+	const { name, price, imageUrl } = props,
+		dispatch = useDispatch(),
+		addItemHandler = () => dispatch(cartActions.addProduct(props));
+
 	return (
 		<div className="product-card-container">
 			<div className="img-container">
@@ -11,7 +17,9 @@ const ProductCard = ({ name, price, imageUrl, id }) => {
 				<span className="name">{name}</span>
 				<span className="price">{price}</span>
 			</div>
-			<Button buttonType="inverted">Add to card</Button>
+			<Button buttonType="inverted" onClick={addItemHandler}>
+				Add to card
+			</Button>
 		</div>
 	);
 };
