@@ -6,7 +6,6 @@ import { signOutUser } from "../../utils/firebase.auth";
 
 const Navigation = () => {
 	const { user } = useSelector(state => state.login);
-	console.log(user);
 	return (
 		<>
 			<div className="navigation">

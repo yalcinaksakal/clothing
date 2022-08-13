@@ -9,12 +9,14 @@ import {
 } from "./utils/firebase.auth";
 import { useDispatch } from "react-redux";
 import { loginActions } from "./store/login-slice";
-const Demo = () => <h1>XXXX</h1>;
+import Shop from "./routes/shop/shop";
+
 const App = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
-		const unsubscribeFromAuth = onAuthStateChangedListener(userAuth => {
-			userAuth && createUserDocFromAuth(userAuth);
+		const unsubscribeFromAuth = onAuthStateChangedListener(async userAuth => {
+			userAuth && (userAuth = await createUserDocFromAuth(userAuth));
+			console.log(userAuth);
 			dispatch(loginActions.setUser(userAuth));
 		});
 		return unsubscribeFromAuth;
@@ -23,7 +25,7 @@ const App = () => {
 		<Routes>
 			<Route path="/" element={<Navigation />}>
 				<Route index element={<Home />} />
-				<Route path="shop" element={<Demo />} />
+				<Route path="shop" element={<Shop />} />
 				<Route path="auth" element={<Auth />} />
 			</Route>
 		</Routes>
