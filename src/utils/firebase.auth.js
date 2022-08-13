@@ -4,6 +4,7 @@ import {
 	signInWithRedirect,
 	signInWithPopup,
 	GoogleAuthProvider,
+	createUserWithEmailAndPassword,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -23,4 +24,8 @@ provider.setCustomParameters({
 
 export const auth = getAuth(),
 	signInWithGooglePopup = () => signInWithPopup(auth, provider),
-	signInGoogleWithRedirect = () => signInWithRedirect(auth, provider);
+	signInGoogleWithRedirect = () => signInWithRedirect(auth, provider),
+	createUserEmailAndPwd = async (email, pwd) => {
+		if (!email || !pwd) return;
+		return await createUserWithEmailAndPassword(auth, email, pwd);
+	};
