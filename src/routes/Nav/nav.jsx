@@ -3,9 +3,14 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 import "./nav.scss";
 import { useSelector } from "react-redux";
 import { signOutUser } from "../../utils/firebase.auth";
+import CartIcon from "../../components/cart-icon/cartIcon";
+import CartDropdown from "../../components/cart-dropdown/cart-dropdown";
+import { useState } from "react";
 
 const Navigation = () => {
-	const { user } = useSelector(state => state.login);
+	const { user } = useSelector(state => state.login),
+		[isCartVis, setIsCartVis] = useState(false),
+		toogleCartVisibility = () => setIsCartVis(prev => !prev);
 	return (
 		<>
 			<div className="navigation">
@@ -26,8 +31,12 @@ const Navigation = () => {
 							SIGN IN
 						</Link>
 					)}
+					<CartIcon toogleCartVisibility={toogleCartVisibility} />
 				</div>
 			</div>
+			{isCartVis && (
+				<CartDropdown toogleCartVisibility={toogleCartVisibility} />
+			)}
 			<Outlet />
 		</>
 	);
