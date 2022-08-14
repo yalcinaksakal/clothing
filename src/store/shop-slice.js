@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 // import { addCollectionAndDocuments } from "../utils/firebase.auth";
 
 // addCollectionAndDocuments("categories", SHOP_DATA);
-console.log("shop.slice");
+
 const initialState = {
 	products: {},
 };
@@ -15,7 +15,6 @@ const shopSlice = createSlice({
 	reducers: {
 		setProducts(state, action) {
 			state.products = action.payload;
-			console.log(action.payload);
 		},
 	},
 });

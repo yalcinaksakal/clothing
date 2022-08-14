@@ -1,0 +1,22 @@
+.products-container {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	column-gap: 10px;
+	row-gap: 50px;
+}
+.heading {
+	margin-top: 30px;
+	width: 100%;
+	text-align: center;
+	text-transform: uppercase;
+	.link {
+		cursor: pointer;
+		color: gray;
+		display: inline-block;
+		transition: transform 0.1s ease-out;
+		&:hover {
+			color: black;
+			transform: scale(1.2);
+		}
+	}
+}
