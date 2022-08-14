@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { loginActions } from "../../store/login-slice";
 import {
 	createUserDocFromAuth,
 	createUserEmailAndPwd,
@@ -11,16 +13,31 @@ const signUpData = { email: "", name: "", pwd: "", pwd2: "" };
 
 const SignUp = () => {
 	const [data, setData] = useState(signUpData),
+		[err, setErr] = useState(false),
+		dispatch = useDispatch(),
+		errHandler = err => {
+			setErr(err);
+			setTimeout(() => {
+				setErr("");
+			}, 2500);
+		},
 		{ email, name, pwd, pwd2 } = data,
 		submitHandler = async event => {
 			event.preventDefault();
-			if (pwd !== pwd2) return;
+			if (pwd !== pwd2) {
+				errHandler("Passwords don't match");
+				return;
+			}
 			try {
 				const { user } = await createUserEmailAndPwd(email, pwd);
-				await createUserDocFromAuth(user, { displayName: name });
+				dispatch(
+					loginActions.setUser(
+						await createUserDocFromAuth({ ...user, displayName: name })
+					)
+				);
 				setData(signUpData);
 			} catch (err) {
-				console.log(err.message);
+				errHandler(err.message);
 			}
 		},
 		changeHandler = event => {
@@ -66,6 +83,7 @@ const SignUp = () => {
 				/>
 				<Button type="submit">Sign Up</Button>
 			</form>
+			<h2 style={{ color: "red" }}>{err}</h2>
 		</div>
 	);
 };

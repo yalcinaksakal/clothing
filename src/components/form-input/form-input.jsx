@@ -4,9 +4,9 @@ const FormInput = ({ label, ...otherProps }) => {
 		<div className={styles.group}>
 			<input className={styles.formInput} {...otherProps}></input>
 			<label
-				className={
-					(otherProps.value.length ? styles.shrink : "") + styles.formInputLabel
-				}
+				className={`${otherProps.value.length ? styles.shrink : ""} ${
+					styles.formInputLabel
+				}`}
 			>
 				{label}
 			</label>

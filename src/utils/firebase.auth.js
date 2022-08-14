@@ -10,7 +10,14 @@ import {
 	onAuthStateChanged,
 } from "firebase/auth";
 
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+	getFirestore,
+	doc,
+	getDoc,
+	setDoc,
+	collection,
+	writeBatch,
+} from "firebase/firestore";
 
 const firebaseConfig = {
 		apiKey: "AIzaSyB5xuQapPeVLLWDsZHh4vUvUGDVZOc0RAk",
@@ -36,29 +43,24 @@ export const auth = getAuth(),
 	};
 
 export const db = getFirestore(),
-	createUserDocFromAuth = async (userAuth, additionalInformation) => {
+	createUserDocFromAuth = async userAuth => {
 		const userDocRef = doc(db, "users", userAuth.uid),
 			userSnapshot = await getDoc(userDocRef),
-			{ email } = userAuth;
-		let displayName = userSnapshot.exists()
-			? userSnapshot.data().displayName
-			: "";
+			{ email, uid, displayName } = userAuth;
 
 		if (!userSnapshot.exists()) {
 			const createdAt = new Date();
-			displayName = additionalInformation.displayName;
 			try {
 				await setDoc(userDocRef, {
 					displayName,
 					email,
 					createdAt,
-					...additionalInformation,
 				});
 			} catch (err) {
 				console.log("error creating the user", err.message);
 			}
 		}
-		return { displayName, email };
+		return { displayName, email, uid };
 	};
 
 export const signIn = async (email, pwd) => {
@@ -70,3 +72,19 @@ export const signOutUser = async () => await signOut(auth);
 
 export const onAuthStateChangedListener = callback =>
 	onAuthStateChanged(auth, callback);
+
+///add collection and documents
+
+export const addCollectionAndDocuments = async (
+	collectionKey,
+	objectsToAdd
+) => {
+	const colRef = collection(db, collectionKey),
+		batch = writeBatch(db);
+
+	objectsToAdd.forEach(obj => {
+		const docRef = doc(colRef, obj.title.toLowerCase());
+		batch.set(docRef, obj);
+	});
+	await batch.commit();
+};
