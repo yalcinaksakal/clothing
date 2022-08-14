@@ -21,12 +21,20 @@
 	.price {
 		width: 23%;
 	}
+	.name {
+		padding-top: 10px;
+		span {
+			display: block;
+			font-size: 10px;
+		}
+	}
 
 	.quantity {
 		display: flex;
 
 		.arrow {
 			cursor: pointer;
+			user-select: none;
 		}
 
 		.value {
@@ -38,5 +46,6 @@
 		color: red;
 		padding-left: 12px;
 		cursor: pointer;
+		user-select: none;
 	}
 }

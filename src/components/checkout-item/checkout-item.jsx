@@ -10,7 +10,10 @@ const CheckoutItem = ({ item }) => {
 			<div className="image-container">
 				<img src={imageUrl} alt={name} />
 			</div>
-			<div className="name">{name}</div>
+			<div className="name">
+				{name}
+				<span>{price}€</span>
+			</div>
 			<div className="quantity">
 				<span
 					className="arrow"

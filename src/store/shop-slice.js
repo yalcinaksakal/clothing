@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import products from "../shop-data.json";
-console.log(products);
+
 const initialState = {
 	products,
 };
