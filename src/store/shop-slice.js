@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getProductsData1 } from "./shop-slice-thunk-aciton";
 // import SHOP_DATA from "../shop-data";
 // import products from "../shop-data.json";
 // import { addCollectionAndDocuments } from "../utils/firebase.auth";
@@ -16,6 +17,11 @@ const shopSlice = createSlice({
 		setProducts(state, action) {
 			state.products = action.payload;
 		},
+	},
+	extraReducers(builder) {
+		builder.addCase(getProductsData1.fulfilled, (state, action) => {
+			state.products = action.payload;
+		});
 	},
 });
 

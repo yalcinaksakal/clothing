@@ -1,3 +1,4 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getCategoriesAndDocuments } from "../utils/firebase.auth";
 import { shopActions } from "./shop-slice";
 
@@ -11,3 +12,15 @@ export const getProductsData = () => {
 		}
 	};
 };
+
+export const getProductsData1 = createAsyncThunk(
+	"shop/getProductsData",
+	async () => {
+		try {
+			const products = await getCategoriesAndDocuments();
+			return products;
+		} catch (error) {
+			return null;
+		}
+	}
+);

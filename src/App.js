@@ -11,7 +11,10 @@ import { useDispatch } from "react-redux";
 import { loginActions } from "./store/login-slice";
 import Shop from "./routes/shop/shop";
 import Checkout from "./routes/checkout/checkout";
-import { getProductsData } from "./store/shop-slice-thunk-aciton";
+import {
+	getProductsData,
+	getProductsData1,
+} from "./store/shop-slice-thunk-aciton";
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -20,7 +23,8 @@ const App = () => {
 			userAuth && (userAuth = await createUserDocFromAuth(userAuth));
 			dispatch(loginActions.setUser(userAuth));
 		});
-		dispatch(getProductsData());
+		// dispatch(getProductsData());
+		dispatch(getProductsData1());
 		return unsubscribeFromAuth;
 	}, [dispatch]);
 	return (
