@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const CategoryItem = ({ imageUrl, title }) => {
 	const navigate = useNavigate(),
 		navigator = () => {
-			navigate("/shop/" + title);
+			navigate("/shop/" + title.toLocaleLowerCase());
 		};
 	return (
 		<div className="category-container">

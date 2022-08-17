@@ -97,9 +97,10 @@ export const getCategoriesAndDocuments = async () => {
 	const colRef = collection(db, "categories"),
 		q = query(colRef),
 		qSnapshot = await getDocs(q);
+
 	return qSnapshot.docs.reduce((acc, docSnapsot) => {
-		const { title, items } = docSnapsot.data();
-		acc[title.toLowerCase()] = items;
+		const { title, items, id, imageUrl } = docSnapsot.data();
+		acc[title.toLowerCase()] = { items, title, id, imageUrl };
 		return acc;
 	}, {});
 };

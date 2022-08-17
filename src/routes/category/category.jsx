@@ -6,14 +6,13 @@ import SpinnerDots from "../../components/spinner/SpinnerDots";
 
 const Category = () => {
 	const { category } = useParams(),
-		products = useSelector(state => state.shop).products[category];
-	console.log(products);
+		products = useSelector(state => state.shop).products;
 	return (
 		<>
 			<h2>{category.toLocaleUpperCase()}</h2>
-			{products ? (
+			{products[category] ? (
 				<div className="products-container">
-					{products.map(product => (
+					{products[category].items.map(product => (
 						<ProductCard key={product.id} {...product} />
 					))}
 				</div>

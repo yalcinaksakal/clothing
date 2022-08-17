@@ -13,12 +13,12 @@ const Categories = () => {
 			{Object.keys(products).map(title => (
 				<Fragment key={title}>
 					<h2 className="heading">
-						<Link className="link" to={"/shop/" + title}>
+						<Link className="link" to={"/shop/" + title.toLocaleLowerCase()}>
 							{title}
 						</Link>
 					</h2>
 					<div className="products-container">
-						{products[title].slice(0, 4).map(product => (
+						{products[title].items.slice(0, 4).map(product => (
 							<ProductCard key={product.id} {...product} />
 						))}
 					</div>
