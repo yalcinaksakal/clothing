@@ -41,18 +41,28 @@ const loggerMiddleware = store => next => action => {
 		storage,
 	},
 	persistedCartReducer = persistReducer(persistConfig, cartReducer),
+	defaultMiddleware = getDefaultMiddleware =>
+		getDefaultMiddleware({
+			serializableCheck: {
+				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+			},
+		}),
+	defaultMiddlewareConcatLogger = getDefaultMiddleware =>
+		getDefaultMiddleware({
+			serializableCheck: {
+				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+			},
+		}).concat(loggerMiddleware),
 	store = configureStore({
 		reducer: {
 			login: loginReducer,
 			shop: shopReducer,
 			cart: persistedCartReducer,
 		},
-		middleware: getDefaultMiddleware =>
-			getDefaultMiddleware({
-				serializableCheck: {
-					ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-				},
-			}).concat(loggerMiddleware),
+		middleware:
+			process.env.NODE_ENV === "production"
+				? defaultMiddleware
+				: defaultMiddlewareConcatLogger,
 		// middleware: [loggerMiddleware],
 	});
 
