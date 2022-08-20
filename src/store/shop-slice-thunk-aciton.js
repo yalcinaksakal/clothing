@@ -20,7 +20,7 @@ export const getProductsData1 = createAsyncThunk(
 			const products = await getCategoriesAndDocuments();
 			return products;
 		} catch (error) {
-			return null;
+			console.log(error.message);
 		}
 	}
 );

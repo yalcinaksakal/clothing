@@ -6,9 +6,11 @@ import { signOutUser } from "../../utils/firebase.auth";
 import CartIcon from "../../components/cart-icon/cartIcon";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown";
 import { useState } from "react";
+import SpinnerDots from "../../components/spinner/SpinnerDots";
 
 const Navigation = () => {
 	const { user } = useSelector(state => state.login),
+		{ isLoading } = useSelector(state => state.shop),
 		[isCartVis, setIsCartVis] = useState(false),
 		toogleCartVisibility = () => setIsCartVis(prev => !prev);
 	return (
@@ -36,6 +38,11 @@ const Navigation = () => {
 			</div>
 			{isCartVis && (
 				<CartDropdown toogleCartVisibility={toogleCartVisibility} />
+			)}
+			{isLoading && (
+				<div className="spinner">
+					<SpinnerDots />
+				</div>
 			)}
 			<Outlet />
 		</>

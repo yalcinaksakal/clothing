@@ -18,6 +18,7 @@ import {
 
 const App = () => {
 	const dispatch = useDispatch();
+
 	useEffect(() => {
 		const unsubscribeFromAuth = onAuthStateChangedListener(async userAuth => {
 			userAuth && (userAuth = await createUserDocFromAuth(userAuth));

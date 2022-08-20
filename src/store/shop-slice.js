@@ -8,6 +8,7 @@ import { getProductsData1 } from "./shop-slice-thunk-aciton";
 
 const initialState = {
 	products: {},
+	isLoading: false,
 };
 
 const shopSlice = createSlice({
@@ -19,8 +20,16 @@ const shopSlice = createSlice({
 		},
 	},
 	extraReducers(builder) {
+		builder.addCase(getProductsData1.pending, state => {
+			state.isLoading = true;
+		});
 		builder.addCase(getProductsData1.fulfilled, (state, action) => {
 			state.products = action.payload;
+			state.isLoading = false;
+		});
+		builder.addCase(getProductsData1.rejected, state => {
+			state.isLoading = false;
+			console.log("Couldn't fetch products from firebase");
 		});
 	},
 });
